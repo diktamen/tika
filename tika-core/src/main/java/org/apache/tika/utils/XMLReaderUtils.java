@@ -128,7 +128,7 @@ public class XMLReaderUtils implements Serializable {
     //BE CAREFUL with the return type. Some parsers will silently ignore an unexpected return type: CVE-2025-54988
     private static final XMLResolver IGNORING_STAX_ENTITY_RESOLVER =
             (publicID, systemID, baseURI, namespace) ->
-                    UnsynchronizedByteArrayInputStream.nullInputStream();
+                    new UnsynchronizedByteArrayInputStream(new byte[0]);
     /**
      * Parser pool size
      */

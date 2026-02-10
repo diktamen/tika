@@ -174,7 +174,7 @@ public class FileSystemFetcher extends AbstractFetcher implements Initializable 
     @Override
     public void checkInitialization(InitializableProblemHandler problemHandler)
             throws TikaConfigException {
-        if (basePath == null || basePath.toString().isBlank()) {
+        if (basePath == null || basePath.toString().trim().isEmpty()) {
             if (!allowAbsolutePaths) {
                 throw new TikaConfigException(
                         "'basePath' must be set, or 'allowAbsolutePaths' must be true. "
