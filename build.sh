@@ -1,0 +1,2 @@
+#!/bin/bash
+mvn install -pl tika-core,tika-parsers/tika-parsers-standard/tika-parsers-standard-modules/tika-parser-audiovideo-module -am -Dtest='!org.apache.tika.config.ExternalParserTest,!org.apache.tika.TikaIT,!org.apache.tika.parser.audio.AudioParserTest,!org.apache.tika.parser.mp3.Mp3ParserTest,!org.apache.tika.parser.mp4.MP4ParserTest,!org.apache.tika.parser.video.FLVParserTest' -Dsurefire.failIfNoSpecifiedTests=false
