@@ -19,6 +19,7 @@ package org.apache.tika.pipes;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -69,7 +70,7 @@ public class PipesClientTest {
     @Test
     public void testMetadataFilter() throws IOException, InterruptedException {
         ParseContext parseContext = new ParseContext();
-        MetadataFilter metadataFilter = new CompositeMetadataFilter(List.of(new MockUpperCaseFilter()));
+        MetadataFilter metadataFilter = new CompositeMetadataFilter(Collections.singletonList(new MockUpperCaseFilter()));
         parseContext.set(MetadataFilter.class, metadataFilter);
         PipesResult pipesResult = pipesClient.process(
                 new FetchEmitTuple(testPdfFile, new FetchKey(fetcherName, testPdfFile),
@@ -83,7 +84,7 @@ public class PipesClientTest {
     @Test
     public void testMetadataListFilter() throws IOException, InterruptedException {
         ParseContext parseContext = new ParseContext();
-        MetadataListFilter metadataFilter = new CompositeMetadataListFilter(List.of(new AttachmentCountingListFilter()));
+        MetadataListFilter metadataFilter = new CompositeMetadataListFilter(Collections.singletonList(new AttachmentCountingListFilter()));
         parseContext.set(MetadataListFilter.class, metadataFilter);
         PipesResult pipesResult = pipesClient.process(
                 new FetchEmitTuple("mock/embedded.xml", new FetchKey(fetcherName, "mock/embedded.xml"),

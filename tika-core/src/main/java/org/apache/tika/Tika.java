@@ -521,7 +521,7 @@ public class Tika {
         WriteOutContentHandler handler = new WriteOutContentHandler(maxLength);
         ParseContext context = new ParseContext();
         context.set(Parser.class, parser);
-        try (stream) {
+        try (InputStream is = stream) {
             parser.parse(stream, new BodyContentHandler(handler), metadata, context);
         } catch (SAXException e) {
             if (!WriteLimitReachedException.isWriteLimitReached(e)) {
