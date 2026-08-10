@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
-import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.junit.jupiter.api.Assertions;
@@ -106,7 +105,8 @@ public class PipesClientTest {
         //I did both manually during development, but unit tests are better. :D
         ParseContext parseContext = new ParseContext();
         parseContext.set(TikaTaskTimeout.class, new TikaTaskTimeout(1000));
-        MetadataListFilter metadataFilter = new CompositeMetadataListFilter(List.of(new AttachmentCountingListFilter()));
+        MetadataListFilter metadataFilter = new CompositeMetadataListFilter(
+                Collections.singletonList(new AttachmentCountingListFilter()));
         parseContext.set(MetadataListFilter.class, metadataFilter);
         PipesResult pipesResult = pipesClient.process(
                 new FetchEmitTuple("mock/timeout-10s.xml", new FetchKey(fetcherName, "mock/timeout-10s.xml"),

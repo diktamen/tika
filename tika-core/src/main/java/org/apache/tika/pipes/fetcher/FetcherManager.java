@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -56,7 +57,8 @@ public class FetcherManager extends ConfigBase {
                      Files.newInputStream(p)) {
             FetcherManager fetcherManager = FetcherManager.buildCompositeOrNull("fetchers",
                     FetcherManager.class, "fetcher", Fetcher.class, is);
-            return fetcherManager == null ? new FetcherManager(List.of()) : fetcherManager;
+            return fetcherManager == null ? new FetcherManager(Collections.<Fetcher>emptyList())
+                    : fetcherManager;
         }
     }
     private final Map<String, Fetcher> fetcherMap = new ConcurrentHashMap<>();

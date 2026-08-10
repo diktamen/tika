@@ -24,7 +24,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.drew.metadata.mp4.Mp4Directory;
@@ -149,18 +148,19 @@ public class MP4ParserTest extends TikaTest {
 
     @Test
     public void testAudioOnlyCheck() {
-        assertTrue(MP4Parser.isAudioOnly(List.of(new Mp4SoundDirectory())));
+        assertTrue(MP4Parser.isAudioOnly(Collections.singletonList(new Mp4SoundDirectory())));
     }
 
     @Test
     public void testMetadataWithSoundConsideredAudio() {
-        assertTrue(MP4Parser.isAudioOnly(List.of(new Mp4SoundDirectory(), new Mp4MetaDirectory())));
+        assertTrue(MP4Parser.isAudioOnly(
+                Arrays.asList(new Mp4SoundDirectory(), new Mp4MetaDirectory())));
     }
 
     @Test
     public void testVideoDirectoriesNotConsideredAudio() {
-        final Collection<Mp4Directory> directories =
-                List.of(new Mp4VideoDirectory(), new Mp4VideoDirectory(), new Mp4SoundDirectory());
+        final Collection<Mp4Directory> directories = Arrays.asList(
+                new Mp4VideoDirectory(), new Mp4VideoDirectory(), new Mp4SoundDirectory());
 
         assertFalse(MP4Parser.isAudioOnly(directories));
     }
